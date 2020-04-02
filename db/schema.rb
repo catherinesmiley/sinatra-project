@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 20200402210517) do
     t.string  "name"
     t.string  "city"
     t.string  "type"
-    t.string  "menu_items"
     t.string  "notes"
     t.integer "user_id"
   end
