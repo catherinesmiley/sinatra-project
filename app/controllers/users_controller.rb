@@ -6,12 +6,16 @@ class UsersController < ApplicationController
 
     post '/signup' do 
         user = User.create(params)
-        session[:user_id] = user.id
-        redirect to "/users/#{user.id}" 
+        if user.valid?
+            session[:user_id] = user.id
+            redirect to "/users/#{user.id}" 
+        else 
+            redirect to '/signup'
+        end 
     end 
 
     get '/users/:id' do 
-        if User.find_by(id: params [:id])
+        if User.find_by(id: params[:id])
             @user = User.find_by(id: params[:id])
         else 
             redirect to '/'
