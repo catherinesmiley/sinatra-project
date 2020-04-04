@@ -38,6 +38,16 @@ class UsersController < ApplicationController
         end 
     end 
 
+    get '/users' do 
+        if Helpers.logged_in?(session)
+            @users = User.all 
+            @user = Helpers.current_user(session)
+            erb :'/users/index'
+        else 
+            redirect to '/'
+        end 
+    end 
+
     get '/users/:id' do 
         if Helpers.logged_in?(session) && User.find_by(id: params[:id])
             @user = User.find_by(id: params[:id])
