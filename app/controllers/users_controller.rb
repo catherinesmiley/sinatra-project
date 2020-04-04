@@ -49,12 +49,12 @@ class UsersController < ApplicationController
     end 
 
     get '/users/:id' do 
-        if Helpers.logged_in?(session) && User.find_by(id: params[:id])
-            @user = User.find_by(id: params[:id])
+        @user = User.find_by(id: params[:id])
+        if Helpers.logged_in?(session) && Helpers.current_user(session) == @user 
+            erb :'/users/show'
         else 
             redirect to '/'
         end 
-        erb :'/users/show'
     end 
 
     get '/logout' do 
