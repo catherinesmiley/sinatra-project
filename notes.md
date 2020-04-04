@@ -1,0 +1,2 @@
+-add elsif to users/:id to redirect logged in but not current user to his/her homepage
+-only log out if user is logged in 
