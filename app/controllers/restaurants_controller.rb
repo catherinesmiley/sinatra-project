@@ -1,12 +1,20 @@
 class RestaurantsController < ApplicationController
 
     get '/restaurants' do 
-        @restaurants = Restaurant.all
-        erb :'/restaurants/index'
+        if Helpers.logged_in?(session)
+            @restaurants = Restaurant.all
+            erb :'/restaurants/index'
+        else 
+            redirect to '/'
+        end 
     end 
     
     get '/restaurants/new' do 
-        erb :'/restaurants/new'
+        if Helpers.logged_in?(session)
+            erb :'/restaurants/new'
+        else 
+            redirect to '/'
+        end 
     end 
 
     post '/restaurants' do 
